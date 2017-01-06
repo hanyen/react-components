@@ -41,11 +41,37 @@ var App = () => (
 class GroceryListItem extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      done: false,
+      hover: false,
+    };
+  }
+
+  onListItemClick() {
+    this.setState( {
+      done: !this.state.done
+      }
+    );
+
+  }
+
+  //onlistitem hover
+  onListItemHover() {
+    this.setState( {
+      hover: !this.state.hover
+      }
+    );
   }
 
   render() {
+
+    var style = {
+      textDecoration: this.state.done ? 'line-through' : 'none',
+      fontWeight: this.state.hover ? 'bold' : 'normal'
+    };
     return(
-      <li>{this.props.list}</li>
+      <li style={style} onMouseOver={this.onListItemHover.bind(this)} onClick={this.onListItemClick.bind(this)}>{this.props.list}</li>
     );
   }
 }
